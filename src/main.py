@@ -73,13 +73,13 @@ def main(
     """
     # Настройка логирования (только в файл)
     setup_logging(LOG_DIR, LOG_LEVEL, LOG_FORMAT)
-    
+
     # Отключаем вывод логов в консоль для библиотек
     logging.getLogger("httpx").setLevel(logging.WARNING)
     logging.getLogger("huggingface_hub").setLevel(logging.WARNING)
     logging.getLogger("sentence_transformers").setLevel(logging.WARNING)
     logging.getLogger("torch").setLevel(logging.WARNING)
-    
+
     logger.info("=" * 50)
     logger.info("Запуск Q&A системы")
     logger.info(f"Файл данных: {data}")

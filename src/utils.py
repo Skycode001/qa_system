@@ -2,10 +2,8 @@
 
 import json
 import logging
-import sys
 from datetime import datetime
 from pathlib import Path
-from typing import Optional
 
 
 def setup_logging(
@@ -25,29 +23,29 @@ def setup_logging(
         Logger: Настроенный логгер
     """
     log_dir.mkdir(exist_ok=True)
-    
+
     # Создаем имя файла лога с датой
     log_filename = f"qa_system_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
     log_file = log_dir / log_filename
-    
+
     # Очищаем существующие хендлеры у корневого логгера
     root_logger = logging.getLogger()
     for handler in root_logger.handlers[:]:
         root_logger.removeHandler(handler)
-    
+
     # Настраиваем корневой логгер
     root_logger.setLevel(getattr(logging, log_level.upper()))
-    
+
     # Только файловый хендлер (без консоли)
     file_handler = logging.FileHandler(log_file, encoding="utf-8")
     file_handler.setFormatter(logging.Formatter(log_format))
     root_logger.addHandler(file_handler)
-    
+
     # Получаем логгер для текущего модуля
     logger = logging.getLogger("qa_system")
-    logger.info(f"=== Q&A система запущена ===")
+    logger.info("=== Q&A система запущена ===")
     logger.info(f"Логи сохраняются в: {log_file}")
-    
+
     return logger
 
 
